@@ -1,0 +1,21 @@
+{
+	"name": "cut-session",
+	"private": true,
+	"version": "0.0.0",
+	"description": "You are a senior software engineer working for a big tech company in Germany. You love it, but you are far from home in Nigeria where most of your family, including your younger sister lives. She’s currently in Uyo to help a friend as a wedding planner and now needs to scout for studios for the pre-wedding photo session.",
+	"repository": "git@github.com:Samtaylek17/cutsession.git",
+	"author": "Temitayo Ogunsusi",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "tsc && vite build",
+		"preview": "vite preview"
+	},
+	"devDependencies": {
+		"autoprefixer": "^10.4.13",
+		"postcss": "^8.4.20",
+		"tailwindcss": "^3.2.4",
+		"typescript": "^4.9.3",
+		"vite": "^4.0.0"
+	}
+}

@@ -1,9 +1,7 @@
-import moment from 'moment';
 import AbstractView from '../../AbstractView';
 import Protected from '../../Authorization/Protected';
 import Restricted from '../../Authorization/Restricted';
 import Navbar from '../../components/Navbar';
-import { navigateTo } from '../../main';
 
 class CreateSession extends AbstractView {
 	constructor(params: Record<string, any>) {
@@ -48,10 +46,7 @@ class CreateSession extends AbstractView {
 
 			fetch(`https://stoplight.io/mocks/pipeline/pipelinev2-projects/111233856/studios/${merchant.token}`, options)
 				.then((response) => response.json())
-				.then((response) => {
-					console.log(response);
-					navigateTo('/merchant');
-				})
+				.then((response) => console.log(response))
 				.catch((err) => console.error(err));
 		});
 	}

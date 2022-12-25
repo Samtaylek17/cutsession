@@ -3,6 +3,9 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import User from './pages/User';
 import Sessions from './pages/Sessions';
+import Merchant from './pages/Merchant';
+import CreateSession from './pages/Sessions/createSession';
+import Book from './pages/Bookings/book';
 
 const pathToRegex = (path: string) => new RegExp('^' + path.replace(/\//g, '\\/').replace(/:\w+/g, '(.+)') + '$');
 
@@ -28,6 +31,9 @@ const router = async () => {
 		{ path: '/login', component: Login },
 		{ path: '/signup', component: Signup },
 		{ path: '/studio/:merchantId', component: Sessions },
+		{ path: '/merchant', component: Merchant },
+		{ path: '/session/create', component: CreateSession },
+		{ path: '/session/:sessionId/book', component: Book },
 	];
 
 	const potentialMatches = routes.map((route) => {

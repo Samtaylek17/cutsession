@@ -12,7 +12,9 @@ class Restricted {
 	authorizeUser(user: IUser) {
 		if (user.accessType !== this.role) {
 			navigateTo(`/${user.accessType.toLowerCase()}`);
+			window.location.replace(`/${user.accessType.toLowerCase()}`);
 		}
+		return;
 	}
 }
 

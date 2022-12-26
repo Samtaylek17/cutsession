@@ -6,6 +6,7 @@ import Sessions from './pages/Sessions';
 import Merchant from './pages/Merchant';
 import CreateSession from './pages/Sessions/createSession';
 import Book from './pages/Bookings/book';
+import { sessionWidgets } from './Widget';
 
 const pathToRegex = (path: string) => new RegExp('^' + path.replace(/\//g, '\\/').replace(/:\w+/g, '(.+)') + '$');
 
@@ -82,3 +83,5 @@ document.addEventListener('DOMContentLoaded', () => {
 			window.location.replace(`/login`);
 		});
 });
+
+sessionWidgets();

@@ -11,7 +11,6 @@ class Book extends AbstractView {
 		this.form = <HTMLFormElement>document.querySelector('#book-form');
 
 		this.setTitle('Booking');
-		// this.handleSubmit();
 	}
 
 	scripts() {

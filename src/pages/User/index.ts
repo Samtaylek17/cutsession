@@ -5,11 +5,13 @@ import Navbar from '../../components/Navbar';
 
 class User extends AbstractView {
 	studios: Record<string, any>[];
+	navbar: any;
 	constructor(params: any) {
 		super(params);
 
 		this.setTitle('Studio');
 		this.studios = [];
+		this.navbar = null;
 	}
 
 	scripts() {
@@ -74,14 +76,14 @@ class User extends AbstractView {
 
 		new Restricted('USER');
 
-		const navbar = await new Navbar(this.params).render();
+		const navbar = await new Navbar(this.params);
 
 		return `
       <section class="bg-blue-800 pb-8">
         <div class="container mx-auto px-4 sm:px-8">
-          ${navbar}
+          ${await navbar.render()}
 					<div class="mt-4">
-						<h3 class="text-white">Dashboard / Merchant</h3>
+						<a href="/session/bookings" class="text-white" data-link>View Bookings</a>
 					</div>
         </div>
       </section>
@@ -102,7 +104,7 @@ class User extends AbstractView {
 									<p class="capitalize text-slate-600 text-sm italic truncate" data-name></p>
 								</div>
 								<div class="flex gap-2 items-center">
-									<h6 class="capitalize truncate">Email:</h6>
+									<h6 class="capitalize">Email:</h6>
 									<p class="capitalize text-slate-600 text-sm italic truncate" data-email></p>
 								</div>
 								<div class="flex gap-2 items-center">

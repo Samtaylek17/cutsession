@@ -6,7 +6,8 @@ import Sessions from './pages/Sessions';
 import Merchant from './pages/Merchant';
 import CreateSession from './pages/Sessions/createSession';
 import Book from './pages/Bookings/book';
-import { sessionWidgets } from './Widget';
+import Bookings from './pages/Bookings/BookingList';
+import MerchantBookings from './pages/Bookings/merchantBookings';
 
 const pathToRegex = (path: string) => new RegExp('^' + path.replace(/\//g, '\\/').replace(/:\w+/g, '(.+)') + '$');
 
@@ -35,6 +36,8 @@ const router = async () => {
 		{ path: '/merchant', component: Merchant },
 		{ path: '/session/create', component: CreateSession },
 		{ path: '/session/:sessionId/book', component: Book },
+		{ path: '/session/bookings', component: Bookings },
+		{ path: '/merchant/bookings', component: MerchantBookings },
 	];
 
 	const potentialMatches = routes.map((route) => {
@@ -83,5 +86,3 @@ document.addEventListener('DOMContentLoaded', () => {
 			window.location.replace(`/login`);
 		});
 });
-
-sessionWidgets();

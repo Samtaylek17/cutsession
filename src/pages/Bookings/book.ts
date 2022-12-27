@@ -54,7 +54,7 @@ class Book extends AbstractView {
         <div class="container mx-auto px-4 sm:px-8">
           ${navbar}
 					<div class="mt-4">
-						<h3 class="text-white">Dashboard / Merchant</h3>
+						<a href="/session/bookings" class="text-white" data-link>View Bookings</a>
 					</div>
         </div>
       </section>

@@ -20,4 +20,13 @@ class Protected {
 	}
 }
 
+export function navigateAwayFromAuth() {
+	const user = JSON.parse(localStorage.getItem('user') as string);
+
+	if (user && user.token !== null && user.token !== undefined) {
+		window.location.replace(`/`);
+	}
+	return;
+}
+
 export default Protected;

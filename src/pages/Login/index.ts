@@ -1,4 +1,5 @@
 import AbstractView from '../../AbstractView';
+import Protected, { navigateAwayFromAuth } from '../../Authorization/Protected';
 import { setFormMessage } from '../../helpers';
 
 export default class extends AbstractView {
@@ -52,6 +53,7 @@ export default class extends AbstractView {
 	}
 
 	async render() {
+		navigateAwayFromAuth();
 		return `
       <section class="bg-blue-400 min-h-screen py-16 flex justify-center items-center px-4">
         <form id="loginForm" class="userForm bg-white max-w-md w-full mx-auto px-4 py-8 rounded-xl sm:px-8">

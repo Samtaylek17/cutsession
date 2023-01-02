@@ -2,6 +2,8 @@ import Component from '../../Base';
 import Protected from '../../Authorization/Protected';
 import Restricted from '../../Authorization/Restricted';
 import Navbar from '../../components/Navbar';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/atom-one-dark.css';
 
 class Merchant extends Component {
 	sessions: Record<string, any>[];
@@ -47,9 +49,36 @@ class Merchant extends Component {
 		openBtn.addEventListener('click', function (event) {
 			modal.classList.remove('hidden');
 			document.querySelector('[data-body]')!.innerHTML = `
-
+				<div class="">
+					<p>Copy the script below and add to the body of your html page to include an embeddable widget in your website</p>
+						<blockquote class="bg-gray-800 p-4 flex overflow-x-scroll items-center justify-center">
+							<span class="flex-shrink-0">
+								<code class="flex-shrink-0">
+									${
+										hljs.highlight(
+											`
+									<script data-widget data-merchant="<your-merchant-id>" src="./Widget/widget.js"></script>
+								`,
+											{ language: 'xml' }
+										).value
+									}
+								
+								</code>
+							</span>
+						</blockquote>
+				</div>
 			`;
 		});
+
+		closeBtn?.addEventListener('click', () => {
+			modal.classList.add('hidden');
+		});
+
+		window.onclick = function (event) {
+			if (event.target == modal) {
+				modal.classList.add('hidden');
+			}
+		};
 	}
 
 	async render() {

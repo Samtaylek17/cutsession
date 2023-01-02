@@ -37,7 +37,7 @@ const sessionContainerClass = [
 ];
 
 // w-6 h-6 absolute
-const buttonIconClass = ['w-6', 'h-6', 'absolute'];
+const buttonIconClass = ['w-6', 'h-6'];
 
 async function fetchSessions(merchantId) {
 	try {
@@ -94,7 +94,7 @@ class Sessions {
 
 		const closeSession = document.createElement('span');
 		closeSession.innerHTML = CLOSE_ICON;
-		closeSession.classList.add('scale-0', ...buttonIconClass);
+		closeSession.classList.add('hidden', ...buttonIconClass);
 		this.closeSession = closeSession;
 
 		buttonContainer.appendChild(this.viewSession);
@@ -102,7 +102,7 @@ class Sessions {
 		buttonContainer.addEventListener('click', this.toggleSessions.bind(this));
 
 		this.sessionContainer = document.createElement('div');
-		this.sessionContainer.classList.add('scale-0', ...sessionContainerClass);
+		this.sessionContainer.classList.add('hidden', ...sessionContainerClass);
 
 		const sessions = await fetchSessions(this.merchantId);
 		this.sessions = sessions;
@@ -136,7 +136,7 @@ class Sessions {
 					</div>
 
 					<div class="overflow-auto mt-8">
-						<h2 class="mb-4 font-medium">Sessions available during weekdays.</h2>
+						<h2 class="mb-4 font-medium">Sessions available during weekends.</h2>
 						<table class="border-collapse w-full border border-slate-400 mt-4 dark:border-slate-500 bg-white text-sm shadow-sm">
 							<thead class="bg-slate-50">
 								${renderSessionHeaders()}
@@ -160,14 +160,14 @@ class Sessions {
 	toggleSessions() {
 		this.open = !this.open;
 		if (this.open) {
-			this.viewSession.classList.add('scale-0');
-			this.closeSession.classList.remove('scale-0');
-			this.sessionContainer.classList.remove('scale-0');
+			this.viewSession.classList.add('hidden');
+			this.closeSession.classList.remove('hidden');
+			this.sessionContainer.classList.remove('hidden');
 		} else {
 			this.appendSessionContents(this.sessions);
-			this.viewSession.classList.remove('scale-0');
-			this.closeSession.classList.add('scale-0');
-			this.sessionContainer.classList.add('scale-0');
+			this.viewSession.classList.remove('hidden');
+			this.closeSession.classList.add('hidden');
+			this.sessionContainer.classList.add('hidden');
 		}
 	}
 }

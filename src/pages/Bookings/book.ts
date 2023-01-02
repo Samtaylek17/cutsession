@@ -47,9 +47,13 @@ class Book extends Component {
 
 		new Restricted('USER');
 
+		const userObj = JSON.parse(localStorage.getItem('user') as string);
+
+		const user = userObj.token;
+
 		return `
 			<main class="pb-24">
-				${Navbar()}
+				${Navbar(`/studio/${user}`, 'Sessions')}
 				<section class="mt-16">
 					<div class="max-w-3xl mx-auto px-4 sm:px-8">
 						<div class="mt-8 gap-8">

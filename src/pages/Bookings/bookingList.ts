@@ -152,7 +152,7 @@ class Bookings extends Component {
 
 		return `
       <main class="pb-24">
-				${Navbar()}
+				${Navbar('', 'Bookings')}
         <section>
           <div class="max-w-5xl mx-auto px-4 sm:px-8">
             <h5 class="mt-8 text-xl">Search Bookings</h5>

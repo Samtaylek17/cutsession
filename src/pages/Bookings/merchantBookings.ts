@@ -1,9 +1,9 @@
-import AbstractView from '../../AbstractView';
+import Component from '../../Base';
 import Protected from '../../Authorization/Protected';
 import Restricted from '../../Authorization/Restricted';
 import Navbar from '../../components/Navbar';
 
-class MerchantBookings extends AbstractView {
+class MerchantBookings extends Component {
 	merchants: Record<string, any>[];
 	url: string;
 	constructor(params: Record<string, any>) {
@@ -131,18 +131,11 @@ class MerchantBookings extends AbstractView {
 
 		new Restricted('MERCHANT');
 
-		const navbar = await new Navbar(this.params).render();
+		// const navbar = await new Navbar(this.params).render();
 
 		return `
       <main class="pb-24">
-        <section class="bg-blue-800 pb-8">
-          <div class="container mx-auto px-4 sm:px-8">
-            ${navbar}
-						<div class="mt-4">
-							<h3 class="text-white">Dashboard / Merchant</h3>
-						</div>
-          </div>
-        </section>
+        ${Navbar()}
         <section>
           <div class="max-w-5xl mx-auto px-4 sm:px-8">
             <h5 class="mt-8 text-xl">Search Bookings</h5>

@@ -1,4 +1,4 @@
-export default class AbstractView {
+export default class Component {
 	params: Record<string, any>;
 	constructor(params: Record<string, any>) {
 		this.params = params;

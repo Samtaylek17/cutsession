@@ -1,9 +1,9 @@
-import AbstractView from '../../AbstractView';
+import Component from '../../Base';
 import Protected from '../../Authorization/Protected';
 import Restricted from '../../Authorization/Restricted';
 import Navbar from '../../components/Navbar';
 
-class User extends AbstractView {
+class User extends Component {
 	studios: Record<string, any>[];
 	navbar: any;
 	constructor(params: any) {
@@ -76,49 +76,44 @@ class User extends AbstractView {
 
 		new Restricted('USER');
 
-		const navbar = await new Navbar(this.params);
+		// const navbar = await new Navbar(this.params);
 
 		return `
-      <section class="bg-blue-800 pb-8">
-        <div class="container mx-auto px-4 sm:px-8">
-          ${await navbar.render()}
-					<div class="mt-4">
-						<a href="/session/bookings" class="text-white" data-link>View Bookings</a>
+			<main class="pb-24">
+				${Navbar()}
+				<section class="mt-16">
+					<div class="max-w-3xl mx-auto px-4 sm:px-8">
+						<form>
+							<div class="flex gap-3">
+								<input type="search" placeholder="Search studio by name/city" class="border border-slate-300 p-3 w-full rounded-md" data-search />
+							</div>
+						</form>
+						<div class="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-16" id="studios" data-studios>
+							
+						</div>
+						<template data-studio-template>
+							<a class="shadow-md p-4 rounded cursor-pointer flex flex-col gap-2" data-link>
+									<div class="flex gap-2 items-center">
+										<h6 class="capitalize truncate">Name:</h6>
+										<p class="capitalize text-slate-600 text-sm italic truncate" data-name></p>
+									</div>
+									<div class="flex gap-2 items-center">
+										<h6 class="capitalize">Email:</h6>
+										<p class="capitalize text-slate-600 text-sm italic truncate" data-email></p>
+									</div>
+									<div class="flex gap-2 items-center">
+										<h6 class="capitalize truncate">City:</h6>
+										<p class="capitalize text-slate-600 text-sm italic truncate" data-cityofoperation></p>
+									</div>
+									<div class="flex gap-2 items-center">
+										<h6 class="capitalize truncate">PhoneNumber:</h6>
+										<p class="capitalize text-slate-600 text-sm italic truncate" data-phonenumber></p>
+									</div>
+							</a>
+						</template>
 					</div>
-        </div>
-      </section>
-			<section class="mt-16">
-				<div class="max-w-3xl mx-auto px-4 sm:px-8">
-          <form>
-            <div class="flex gap-3">
-              <input type="search" placeholder="Search studio by name/city" class="border border-slate-300 p-3 w-full rounded-md" data-search />
-            </div>
-          </form>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-16" id="studios" data-studios>
-						
-          </div>
-					<template data-studio-template>
-						<a class="shadow-md p-4 rounded cursor-pointer flex flex-col gap-2" data-link>
-								<div class="flex gap-2 items-center">
-									<h6 class="capitalize truncate">Name:</h6>
-									<p class="capitalize text-slate-600 text-sm italic truncate" data-name></p>
-								</div>
-								<div class="flex gap-2 items-center">
-									<h6 class="capitalize">Email:</h6>
-									<p class="capitalize text-slate-600 text-sm italic truncate" data-email></p>
-								</div>
-								<div class="flex gap-2 items-center">
-									<h6 class="capitalize truncate">City:</h6>
-									<p class="capitalize text-slate-600 text-sm italic truncate" data-cityofoperation></p>
-								</div>
-								<div class="flex gap-2 items-center">
-									<h6 class="capitalize truncate">PhoneNumber:</h6>
-									<p class="capitalize text-slate-600 text-sm italic truncate" data-phonenumber></p>
-								</div>
-						</a>
-					</template>
-				</div>
-			</section>
+				</section>
+			</main>
     `;
 	}
 }

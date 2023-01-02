@@ -1,9 +1,9 @@
-import AbstractView from '../../AbstractView';
+import Component from '../../Base';
 import Protected from '../../Authorization/Protected';
 import Restricted from '../../Authorization/Restricted';
 import Navbar from '../../components/Navbar';
 
-class Sessions extends AbstractView {
+class Sessions extends Component {
 	constructor(params: any) {
 		super(params);
 
@@ -64,18 +64,11 @@ class Sessions extends AbstractView {
 
 		new Restricted('USER');
 
-		const navbar = await new Navbar(this.params).render();
+		// const navbar = await new Navbar(this.params).render();
 
 		return `
-			<main class="pb-24">
-				<section class="bg-blue-800 pb-8">
-					<div class="container mx-auto px-4 sm:px-8">
-						${navbar}
-						<div class="mt-4">
-							<h3 class="text-white">Dashboard / Merchant</h3>
-						</div>
-					</div>
-				</section>
+			<main class="pb-24">	
+				${Navbar('', 'Sessions')}
 				<section class="mt-16">
 					<div class="max-w-3xl mx-auto px-4 sm:px-8">
 						<div class="flex mt-8 gap-8 justify-between flex-col-reverse sm:flex-row">

@@ -1,5 +1,5 @@
 import { navigateTo } from '../main';
-import { IUser } from '../types/authentication';
+import { IUser } from '../types';
 
 class Restricted {
 	role: 'USER' | 'MERCHANT';

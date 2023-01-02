@@ -1,9 +1,9 @@
-import AbstractView from '../../AbstractView';
+import Component from '../../Base';
 import Protected from '../../Authorization/Protected';
 import Restricted from '../../Authorization/Restricted';
 import Navbar from '../../components/Navbar';
 
-class Merchant extends AbstractView {
+class Merchant extends Component {
 	sessions: Record<string, any>[];
 	constructor(params: any) {
 		super(params);
@@ -39,6 +39,17 @@ class Merchant extends AbstractView {
 				);
 			})
 			.catch((err) => console.error(err));
+
+		const openBtn = document.querySelector<HTMLButtonElement>('[data-widget]')!;
+		const closeBtn = document.querySelector<HTMLButtonElement>('[data-close]');
+		const modal = document.querySelector<HTMLDivElement>('[data-modal]')!;
+
+		openBtn.addEventListener('click', function (event) {
+			modal.classList.remove('hidden');
+			document.querySelector('[data-body]')!.innerHTML = `
+
+			`;
+		});
 	}
 
 	async render() {
@@ -46,44 +57,56 @@ class Merchant extends AbstractView {
 
 		new Restricted('MERCHANT');
 
-		const navbar = await new Navbar(this.params).render();
-
 		return `
-      <section class="bg-blue-800 pb-8">
-        <div class="container mx-auto px-4 sm:px-8">
-          ${navbar}
-					<div class="mt-4">
-						<h3 class="text-white">Dashboard / Merchant</h3>
-					</div>
-        </div>
-      </section>
-			<section class="mt-16">
-				<div class="max-w-3xl mx-auto px-4 sm:px-8">
-					<div class="flex mt-8 gap-8 justify-between flex-col-reverse sm:flex-row">
-						<h3 class="text-2xl">All Sessions</h3>
-						<a href="/session/create" class="bg-blue-800 text-white px-8 py-2 rounded-md" data-link>Create Session</a>
-					</div>
-					<table class="border-collapse w-full border border-slate-400 mt-16 dark:border-slate-500 bg-white text-sm shadow-sm">
-						<thead class="bg-slate-50">
-							<tr>
-								<th class="w-1/2 border border-slate-300  font-semibold p-4 text-slate-900  text-left">Type</th>
-								<th class="w-1/2 border border-slate-300  font-semibold p-4 text-slate-900  text-left">Starts At</th>
-								<th class="w-1/2 border border-slate-300  font-semibold p-4 text-slate-900  text-left">Ends At</th>
-							</tr>
-						</thead>
-						<tbody data-session-container>
+			<main class="pb-24">
+				${Navbar()}
+				<section class="mt-16">
+					<div class="max-w-3xl mx-auto px-4 sm:px-8">
+						<div class="flex justify-between">
+							<a href="/session/create" class="bg-blue-800 text-white px-8 py-2 rounded-md" data-link>Create Session</a>
+							<button data-widget class="border-blue-800 border  text-blue-800  px-8 py-2 rounded-md">Embed widget</button>
+						</div>
+						<div class="flex mt-8 gap-8 justify-between flex-col-reverse sm:flex-row">
+							<h3 class="text-2xl">All Sessions</h3>
+						</div>
+						<table class="border-collapse w-full border border-slate-400 mt-8 dark:border-slate-500 bg-white text-sm shadow-sm">
+							<thead class="bg-slate-50">
+								<tr>
+									<th class="w-1/2 border border-slate-300  font-semibold p-4 text-slate-900  text-left">Type</th>
+									<th class="w-1/2 border border-slate-300  font-semibold p-4 text-slate-900  text-left">Starts At</th>
+									<th class="w-1/2 border border-slate-300  font-semibold p-4 text-slate-900  text-left">Ends At</th>
+								</tr>
+							</thead>
+							<tbody data-session-container>
 
-						</tbody>
-					</table>
-          <template data-session-template>
-            <tr>
-              <td class="border border-slate-300 p-4 text-slate-500" data-type></td>
-              <td class="border border-slate-300 p-4 text-slate-500" data-startsat></td>
-              <td class="border border-slate-300 p-4 text-slate-500" data-endsat></td>
-            </tr>
-          </template>
-				</div>
-			</section>
+							</tbody>
+						</table>
+						<template data-session-template>
+							<tr>
+								<td class="border border-slate-300 p-4 text-slate-500" data-type></td>
+								<td class="border border-slate-300 p-4 text-slate-500" data-startsat></td>
+								<td class="border border-slate-300 p-4 text-slate-500" data-endsat></td>
+							</tr>
+						</template>
+
+						<div data-modal="booking-modal" class="hidden fixed z-10 pt-32 left-0 top-0 w-full h-full overflow-auto bg-[rgba(0,0,0,0.4)]">
+							<div class="bg-[#fefefe] m-auto p-5 w-full sm:w-1/2 shadow-2xl shadow-slate-700 rounded-md">
+								<button class="inline-flex float-right cursor-pointer" data-close="close">
+									<span class="close">
+										<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+											<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+										</svg>
+									</span>
+								</button>
+								<div data-body>
+								
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</section>
+			</main>
     `;
 	}
 }

@@ -1,4 +1,4 @@
-import { IUser } from '../types/authentication';
+import { IUser } from '../types';
 
 class Protected {
 	constructor() {
@@ -20,6 +20,10 @@ class Protected {
 	}
 }
 
+/**
+ * If the user is logged in, redirect them to the home page
+ * @returns the user object from local storage.
+ */
 export function navigateAwayFromAuth() {
 	const user = JSON.parse(localStorage.getItem('user') as string);
 

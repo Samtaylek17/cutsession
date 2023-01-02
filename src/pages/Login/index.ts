@@ -1,8 +1,8 @@
-import AbstractView from '../../AbstractView';
+import Component from '../../Base';
 import Protected, { navigateAwayFromAuth } from '../../Authorization/Protected';
 import { setFormMessage } from '../../helpers';
 
-export default class extends AbstractView {
+export default class extends Component {
 	constructor(params: Record<string, any>) {
 		super(params);
 		this.setTitle('Login');

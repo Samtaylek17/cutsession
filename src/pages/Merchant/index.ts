@@ -3,7 +3,7 @@ import Protected from '../../Authorization/Protected';
 import Restricted from '../../Authorization/Restricted';
 import Navbar from '../../components/Navbar';
 import hljs from 'highlight.js';
-import 'highlight.js/styles/atom-one-dark.css';
+import 'highlight.js/styles/monokai-sublime.css';
 
 class Merchant extends Component {
 	sessions: Record<string, any>[];
@@ -46,28 +46,71 @@ class Merchant extends Component {
 		const closeBtn = document.querySelector<HTMLButtonElement>('[data-close]');
 		const modal = document.querySelector<HTMLDivElement>('[data-modal]')!;
 
-		openBtn.addEventListener('click', function (event) {
+		openBtn.addEventListener('click', function () {
 			modal.classList.remove('hidden');
 			document.querySelector('[data-body]')!.innerHTML = `
-				<div class="">
-					<p>Copy the script below and add to the body of your html page to include an embeddable widget in your website</p>
-						<blockquote class="bg-gray-800 p-4 flex overflow-x-scroll items-center justify-center">
-							<span class="flex-shrink-0">
-								<code class="flex-shrink-0">
-									${
-										hljs.highlight(
-											`
-									<script data-widget data-merchant="<your-merchant-id>" src="./Widget/widget.js"></script>
-								`,
-											{ language: 'xml' }
-										).value
-									}
-								
-								</code>
-							</span>
-						</blockquote>
+				<div class="mt-8">
+					<h2 class="text-xl font-bold">Embed Widget</h2>
+					<p class="mt-5">Copy the script below and add to the body of your html page to include an embeddable widget in your website</p>
+					<blockquote class="bg-gray-800 px-4 py-6 flex  items-center justify-center mt-8 relative">
+						<button class="text-slate-100 absolute top-2 right-4 bg-slate-600 py-1 px-3 rounded-md" data-copy-js>Copy</button>
+						<div class="flex py-4 flex-shrink-0 overflow-x-scroll max-w-full">
+							<code class="flex-none">
+								${
+									hljs.highlight(
+										`
+										<script data-widget data-merchant="<your-merchant-id>" src="./Widget/widget.js"></script>
+							`,
+										{ language: 'xml' }
+									).value
+								}
+							
+							</code>
+						</div>
+					</blockquote>
+					<p class="mt-5">The widget is designed to integrate beautifully with Tailwind css.</p>
+					<p>Add the script below to the head of your html page</p>
+					<blockquote class="bg-gray-800 p-4 flex  items-center justify-center mt-8 relative">
+						<button class="text-slate-100 absolute top-2 right-4 bg-slate-600 py-1 px-3 rounded-md" data-copy-css>Copy</button>
+						<div class="flex py-4 flex-shrink-0 overflow-x-scroll max-w-full">
+							<code class="flex-none">
+								${
+									hljs.highlight(
+										`
+											<script src="https://cdn.tailwindcss.com"></script>
+							`,
+										{ language: 'xml' }
+									).value
+								}
+							
+							</code>
+						</div>
+					</blockquote>
 				</div>
 			`;
+
+			const jsBtn = document.querySelector<HTMLButtonElement>('[data-copy-js]')!;
+			const cssBtn = document.querySelector<HTMLButtonElement>('[data-copy-css]')!;
+
+			jsBtn.addEventListener('click', () => {
+				navigator.clipboard.writeText(
+					`<script data-widget data-merchant="<your-merchant-id>" src="./Widget/widget.js"></script>`
+				);
+				jsBtn.textContent = 'Copied';
+
+				setTimeout(() => {
+					jsBtn.textContent = 'Copy';
+				}, 2000);
+			});
+
+			cssBtn.addEventListener('click', () => {
+				navigator.clipboard.writeText(`<script src="https://cdn.tailwindcss.com"></script>`);
+				cssBtn.textContent = 'Copied';
+
+				setTimeout(() => {
+					cssBtn.textContent = 'Copy';
+				}, 2000);
+			});
 		});
 
 		closeBtn?.addEventListener('click', () => {

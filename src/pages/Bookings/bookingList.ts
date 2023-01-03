@@ -110,7 +110,6 @@ class Bookings extends Component {
 								(e: { bookingId: string | undefined }) =>
 									e.bookingId === (event.target as HTMLButtonElement).dataset.open
 							)[0];
-							console.log(res);
 							modal.classList.remove('hidden');
 							document.querySelector('[data-body]')!.innerHTML = `
                 <h4 class="text-lg font-bold mt-4">Booking Details</h4>

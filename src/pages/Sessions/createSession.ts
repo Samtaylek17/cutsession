@@ -48,8 +48,7 @@ class CreateSession extends Component {
 
 			fetch(`https://stoplight.io/mocks/pipeline/pipelinev2-projects/111233856/studios/${merchant.token}`, options)
 				.then((response) => response.json())
-				.then((response) => {
-					console.log(response);
+				.then(() => {
 					navigateTo('/merchant');
 				})
 				.catch((err) => console.error(err));

@@ -1,4 +1,5 @@
 import './style.css';
+import HomePage from './pages/HomePage';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import User from './pages/User';
@@ -29,7 +30,8 @@ export const navigateTo = (url: string | URL | null | undefined) => {
 
 const router = async () => {
 	const routes = [
-		{ path: '/', component: User },
+		{ path: '/user', component: User },
+		{ path: '/', component: HomePage },
 		{ path: '/login', component: Login },
 		{ path: '/signup', component: Signup },
 		{ path: '/studio/:merchantId', component: Sessions },

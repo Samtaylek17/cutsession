@@ -102,7 +102,6 @@ class Bookings extends Component {
 					const openBtns = document.querySelectorAll<HTMLButtonElement>('[data-open]')!;
 					const closeBtns = document.querySelectorAll<HTMLButtonElement>('[data-close]')!;
 					const modal = document.querySelector<HTMLDivElement>('[data-modal]')!;
-					console.log(openBtns);
 
 					for (const btn of openBtns) {
 						btn.addEventListener('click', (event) => {
@@ -151,7 +150,7 @@ class Bookings extends Component {
 
 		return `
       <main class="pb-24">
-				${Navbar('', 'Bookings')}
+				${Navbar()}
         <section>
           <div class="max-w-5xl mx-auto px-4 sm:px-8">
             <h5 class="mt-8 text-xl">Search Bookings</h5>

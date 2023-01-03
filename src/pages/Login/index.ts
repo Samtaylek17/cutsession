@@ -19,7 +19,6 @@ export default class extends Component {
 			const password = (<HTMLInputElement>document.querySelector('#password'))!.value;
 			const accessType = (<HTMLInputElement>document.querySelector('input[name="accessType"]:checked'))!.value;
 
-			console.log(accessType);
 			const data = { username, password, accessType };
 
 			const options = {

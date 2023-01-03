@@ -85,7 +85,6 @@ class MerchantBookings extends Component {
 					const openBtns = document.querySelectorAll<HTMLButtonElement>('[data-open]')!;
 					const closeBtns = document.querySelectorAll<HTMLButtonElement>('[data-close]')!;
 					const modal = document.querySelector<HTMLDivElement>('[data-modal]')!;
-					console.log(openBtns);
 
 					for (const btn of openBtns) {
 						btn.addEventListener('click', (event) => {
@@ -93,7 +92,6 @@ class MerchantBookings extends Component {
 								(e: { bookingId: string | undefined }) =>
 									e.bookingId === (event.target as HTMLButtonElement).dataset.open
 							)[0];
-							console.log(res);
 							modal.classList.remove('hidden');
 							document.querySelector('[data-body]')!.innerHTML = `
                 <h4 class="text-lg font-bold mt-4">Booking Details</h4>

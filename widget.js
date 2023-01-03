@@ -52,7 +52,6 @@ async function fetchSessions(merchantId) {
 
 		if (response.ok) {
 			const data = await response.json();
-			console.log(data);
 			return data;
 		} else {
 			const error = await response.json();

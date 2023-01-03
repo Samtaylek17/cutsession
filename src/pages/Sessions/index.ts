@@ -68,7 +68,7 @@ class Sessions extends Component {
 
 		return `
 			<main class="pb-24">	
-				${Navbar('', 'Sessions')}
+				${Navbar()}
 				<section class="mt-16">
 					<div class="max-w-3xl mx-auto px-4 sm:px-8">
 						<div class="flex mt-8 gap-8 justify-between flex-col-reverse sm:flex-row">

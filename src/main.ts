@@ -6,7 +6,7 @@ import Sessions from './pages/Sessions';
 import Merchant from './pages/Merchant';
 import CreateSession from './pages/Sessions/createSession';
 import Book from './pages/Bookings/book';
-import Bookings from './pages/Bookings/BookingList';
+import Bookings from './pages/Bookings/bookingList';
 import MerchantBookings from './pages/Bookings/merchantBookings';
 
 const pathToRegex = (path: string) => new RegExp('^' + path.replace(/\//g, '\\/').replace(/:\w+/g, '(.+)') + '$');

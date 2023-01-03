@@ -1,5 +1,5 @@
 import Component from '../../Base';
-import Protected, { navigateAwayFromAuth } from '../../Authorization/Protected';
+import { navigateAwayFromAuth } from '../../Authorization/Protected';
 import { setFormMessage } from '../../helpers';
 
 export default class extends Component {

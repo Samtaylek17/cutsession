@@ -13,8 +13,8 @@ const Navbar = () => {
 						user === undefined
 							? `
             <div class="flex gap-8 items-center">
-              <a href="/login" id="logout-btn" class="bg-white text-blue-700 px-8 py-2 rounded-md" data-link>Login</a>
-              <a href="/signup" id="logout-btn" class="bg-white text-blue-700 px-8 py-2 rounded-md" data-link>Signup</a>
+              <a href="/login" class="bg-white text-blue-700 px-8 py-2 rounded-md" data-link>Login</a>
+              <a href="/signup" class="bg-white text-blue-700 px-8 py-2 rounded-md" data-link>Signup</a>
             </div>
           `
 							: `

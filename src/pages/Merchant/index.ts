@@ -59,7 +59,7 @@ class Merchant extends Component {
 								${
 									hljs.highlight(
 										`
-										<script data-widget data-merchant="<your-merchant-id>" src="./Widget/widget.js"></script>
+										<script data-widget data-merchant="<your-merchant-id>" src="https://cdn.jsdelivr.net/gh/Samtaylek17/cutsession@main/widget.js"></script>
 							`,
 										{ language: 'xml' }
 									).value
@@ -94,7 +94,7 @@ class Merchant extends Component {
 
 			jsBtn.addEventListener('click', () => {
 				navigator.clipboard.writeText(
-					`<script data-widget data-merchant="<your-merchant-id>" src="./Widget/widget.js"></script>`
+					`<script data-widget data-merchant="<your-merchant-id>" src="https://cdn.jsdelivr.net/gh/Samtaylek17/cutsession@main/widget.js"></script>`
 				);
 				jsBtn.textContent = 'Copied';
 

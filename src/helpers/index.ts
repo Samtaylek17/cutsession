@@ -28,10 +28,7 @@ export function setFormMessage(formElement: Element | null, type: string, messag
  * @param {any} message - The error message that will be displayed.
  */
 export function setInputError(
-	inputElement: {
-		classList: { add: (arg0: string) => void };
-		parentElement: { querySelector: (arg0: string) => { (): any; new (): any; textContent: any } };
-	},
+	inputElement: any,
 	message: string
 	/* It's an array of objects that contain the path and the view. */
 ) {

@@ -19,26 +19,52 @@ class CreateSession extends Component {
 
 		const sessionForm = document.querySelector('#session-form')!;
 
-		document.querySelector('#startsAt')!.addEventListener('change', () => {
+		document.querySelector('[data-startsat]')!.addEventListener('change', () => {
 			const startsAt = new Date().toDateString() + ' ' + (<HTMLInputElement>document.querySelector('#startsAt'))!.value;
 
-			const duration = (<HTMLSelectElement>document.querySelector('#duration'))!.value;
+			const duration = (<HTMLSelectElement>document.querySelector('[data-duration]'))!.value;
 
 			// @ts-ignore
 			const endsAt = moment(new Date(startsAt)).add(duration, 'm').toDate();
 
 			const endTime = new Date(endsAt).toLocaleTimeString();
 
-			document.querySelector('#endsAt')!.setAttribute('value', endTime);
+			document.querySelector('[data-endsat]')!.setAttribute('value', endTime);
+		});
+
+		document.querySelector<HTMLSelectElement>('[data-duration]')!.addEventListener('change', (event) => {
+			const startsAt = document.querySelector<HTMLInputElement>('[data-startsat]')!.value;
+
+			if (startsAt) {
+				const startDate = new Date().toDateString() + ' ' + startsAt;
+				const endsAt = moment(new Date(startDate))
+					.add((event.target as HTMLSelectElement).value, 'm')
+					.toDate();
+
+				const endTime = new Date(endsAt).toLocaleTimeString();
+
+				document.querySelector('[data-endsat]')!.setAttribute('value', endTime);
+			}
+		});
+
+		const dayType = (<HTMLSelectElement>document.querySelector('[data-type]'))!;
+		const startsAt = (<HTMLInputElement>document.querySelector('[data-startsat]'))!;
+		const endsAt = (<HTMLInputElement>document.querySelector('[data-endsat]'))!;
+
+		dayType.addEventListener('change', (event) => {
+			if ((event!.target! as HTMLSelectElement).value === 'WeekDay') {
+				startsAt.min = '09:00';
+				startsAt.max = '20:00';
+			} else {
+				startsAt.min = '10:00';
+				startsAt.max = '22:00';
+			}
 		});
 
 		sessionForm.addEventListener('submit', (event) => {
 			event.preventDefault();
-			const dayType = (<HTMLSelectElement>document.querySelector('#day-type'))!.value;
-			const startsAt = (<HTMLInputElement>document.querySelector('#startsAt'))!.value;
-			const endsAt = (<HTMLInputElement>document.querySelector('#endsAt'))!.value;
 
-			const data = { type: dayType, startsAt, endsAt };
+			const data = { type: dayType.value, startsAt: startsAt.value, endsAt: endsAt.value };
 
 			const options = {
 				method: 'POST',
@@ -70,14 +96,15 @@ class CreateSession extends Component {
 							<form id="session-form" class="max-w-sm mx-auto mt-12">
 								<div class="flex flex-col gap-1">
 									<label class="text-sm text-gray-700">Session Type</label>
-									<select name="type" id="day-type" class="w-full p-3 border rounded-lg form__input">
-										<option value="WeekEnd">WeekEnd</option>
-										<option value="WeekDay">WeekDay</option>
+									<select name="type" id="day-type" class="w-full p-3 border rounded-lg form__input" data-type>
+										<option hidden>Select Session Type</option>
+										<option value="WeekEnd">Weekend</option>
+										<option value="WeekDay">Weekday</option>
 									</select>
 								</div>
 								<div class="mt-4 flex flex-col gap-1">
 									<label class="text-sm text-gray-700">Duration</label>
-									<select name="duration" id="duration" class="w-full p-3 border rounded-lg form__input">
+									<select name="duration" id="duration" class="w-full p-3 border rounded-lg form__input" data-duration>
 										<option value="45">45 Minutes</option>
 										<option value="60">60 Minutes</option>
 										<option value="90">90 Minutes</option>
@@ -85,7 +112,7 @@ class CreateSession extends Component {
 								</div>
 								<div class="mt-4 flex flex-col gap-1">
 									<label for="startsAt" class="text-sm text-gray-800">Starts At</label>
-									<input type="time" step="1" min="09:00" max="20:00" name="startsAt" id="startsAt" class="w-full p-3 border rounded-lg form__input" data-startsat />
+									<input type="time" step="1"  name="startsAt" id="startsAt" class="w-full p-3 border rounded-lg form__input" data-startsat required />
 									<span class="form__input-error-message text-red-500 text-sm"></span>
 								</div>
 								<div class="mt-4 flex flex-col gap-[1px]">
